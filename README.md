@@ -1,4 +1,5 @@
 # sam-sample
+<PRE>
 $ ./start.sh
 $ ./stop.sh
 
@@ -11,3 +12,4 @@ Add new instance.
 ip : iris1
 port: 52773
 instance name: iris
+</PRE>
