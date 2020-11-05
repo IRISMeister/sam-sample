@@ -1,0 +1,6 @@
+[Startup]
+# SYS
+PasswordHash=FBFE8593AEFA510C27FD184738D6E865A441DE98,u4ocm4qh
+
+[config]
+globals=0,0,32,0,0,0
