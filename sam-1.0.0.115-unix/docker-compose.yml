@@ -23,7 +23,7 @@ services:
     image: grafana/grafana:6.7.1
     restart: on-failure
     volumes:
-      - grafdata:/var/lib/grafana
+      #- grafdata:/var/lib/grafana
       - ./config/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./config/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./config/grafana/dashboard-provider.yml:/etc/grafana/provisioning/dashboards/dashboard-provider.yml
@@ -40,7 +40,6 @@ services:
     init: true
     restart: on-failure
     volumes:
-      - irisdata:/dur
       - ./config:/config
 
   nginx:
@@ -78,11 +77,9 @@ services:
       - "52773:52773"
     environment:
       - ISC_DATA_DIRECTORY=/dur/iris1
-      - ISC_CPF_MERGE_FILE=/config/cpf/merge.cpf
+      - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
     volumes:
-      - irisdata:/dur
-      - ./config:/config
+      - ./config/cpf:/cpf
 
-volumes:
-  grafdata: ~
-  irisdata: ~
+#volumes:
+#  grafdata: ~
