@@ -4,6 +4,8 @@ https://github.com/intersystems-community/sam を事前展開したもの。
 オリジナルを変更している。
 1. 監視対象のirisとしてiris1:52773, iris2:52773を自動起動している。
 
+2. alerts managerを公開している。
+
 ## 起動
 ```
 $ cd sam-<version>
@@ -40,6 +42,11 @@ sam_iris_1           /tini -- /iris-main --chec ...   Up (health: starting)   19
 sam_nginx_1          nginx -g daemon off;             Up                      80/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp
 sam_prometheus_1     /bin/prometheus --web.enab ...   Up                      9090/tcp
 
+```
+## アラートのテスト
+```
+$ docker compose -p sam exec iris1 iris session iris
+USER>Do ##class(%SYS.System).WriteToConsoleLog("Severe error xxx",,2)
 ```
 
 ## 停止 

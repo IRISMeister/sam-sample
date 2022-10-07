@@ -3,7 +3,7 @@ route:
   group_wait: 0s
   group_interval: 1s
   repeat_interval: 2m
-  receiver: isc_sam_default
+  receiver: your_receiver
 
 inhibit_rules:
 - source_match:
@@ -13,8 +13,8 @@ inhibit_rules:
   equal: ['alertname', 'instance']
 
 receivers:
-- name: 'isc_sam_default'
+- name: 'your_receiver'
   webhook_configs:
-  - url: http://iris:52773/api/sam/private/alerts
+  - url: http://xxx/xxx/alerts
     send_resolved: false
 ################### DO NOT EDIT ABOVE THIS LINE! ###################
