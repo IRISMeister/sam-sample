@@ -1,5 +1,5 @@
 # System Alerting and Monitoring (SAM) 
-https://github.com/intersystems-community/sam を事前展開したもの。
+https://github.com/intersystems-community/sam を事前展開したもの、プラスアルファ。
 
 オリジナルを変更している。
 1. 監視対象のirisとしてiris1:52773, iris2:52773を自動起動している。
@@ -65,4 +65,5 @@ You'll be prompted to login. You can use standard InterSystems IRIS credentials 
 
 [IRIS native Prometheus exporter documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCM_rest)
 
----
+## 番外編
+SAMを使用せず、prometheus + Grafanaだけを利用する方法は[こちら](nosam/README.md)。

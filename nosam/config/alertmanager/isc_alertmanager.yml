@@ -15,6 +15,6 @@ inhibit_rules:
 receivers:
 - name: 'your_receiver'
   webhook_configs:
-  - url: http://xxx/xxx/alerts
+  - url: https://webhook.site/xxxxx-xxx-xxxx-xxxx-xxxxxxx
     send_resolved: false
 ################### DO NOT EDIT ABOVE THIS LINE! ###################

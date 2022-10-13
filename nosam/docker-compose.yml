@@ -1,17 +1,17 @@
 services:
-#  alertmanager:
-#    command:
-#      - --config.file=/config/isc_alertmanager.yml
-#      - --data.retention=24h
-#      - --cluster.listen-address=
-#    depends_on:
-#      - prometheus
-#    ports:
-#      - 9093:9093
-#    image: prom/alertmanager:v0.20.0
-#    restart: on-failure
-#    volumes:
-#      - ./config/alertmanager:/config
+  alertmanager:
+    command:
+      - --config.file=/config/isc_alertmanager.yml
+      - --data.retention=24h
+      - --cluster.listen-address=
+    depends_on:
+      - prometheus
+    ports:
+      - 9093:9093
+    image: prom/alertmanager:v0.20.0
+    restart: on-failure
+    volumes:
+      - ./config/alertmanager:/config
   grafana:
     depends_on:
       - prometheus

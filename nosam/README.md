@@ -1,11 +1,21 @@
 ﻿# Prometheus and Grafana only
-クラウド上のサービスとの連携を見据えて、prometheus + Grafanaだけ(SAM無し)で監視する試み。
+prometheus + Grafanaだけ(SAM無し)で監視する試み。
 dockerのvolume mountもcpfや各コンフィグ以外には使わないようにする。
 
 利便性等のために、[grafana.ini](config/grafana/grafana.ini)をあれこれ(編集を許可、URLなど)変更している。[SAM用のものと](../sam-1.1.0.107-unix/config/grafana/grafana.ini)と比較すると変更点がわかる。
 
+# 準備
+webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。起動する前に、同サイトにて自分用のURLを取得し、[isc_alertmanager.yml](config/alertmanager/isc_alertmanager.yml)のurlに上書き保存する。
+
+```
+- name: 'isc_sam_default'
+  webhook_configs:
+  - url: https://webhook.site/xxxxx-xxx-xxxx-xxxx-xxxxxxx
+```
+
 # 起動
 ```
+$ cd nosam
 $ docker compose up -d
 ```
 
@@ -45,14 +55,11 @@ iris_system_alerts_new 1
 $ curl http://localhost:52773/api/monitor/alerts
 [{"time":"2022-10-07T07:19:55.997Z","severity":"2","message":"Severe error xxx"}]
 ```
-一度alertsを取得すると、再取得されなくなる。
+一度alertsを取得すると、再取得されなくなる。また、metricsの_newが0に戻る。(つまり_newは未取得のalert件数)
 
 ```
 $ curl http://localhost:52773/api/monitor/alerts
 []
-```
-metricsの_newが0に戻る。(つまり_newは未取得のalert件数)
-```
 $ curl http://localhost:52773/api/monitor/metrics | grep alert
 iris_system_alerts 1
 iris_system_alerts_log 1
@@ -91,15 +98,21 @@ SAM Dashboardを選ぶとダッシュボードが表示できる。
 
 Grafanaから見たprometheusのエンドポイントは、http://prometheus:9090/ になっている。[datasource.yml](config/grafana/datasource.yml)で指定している。
 
-## prometheus Alerts U/I
-alertmanagerは現在未使用。機能させるには、[isc_alertmanager.yml](config/alertmanager/isc_alertmanager.yml)で設定している、下記のurlに(samの代わりになる)受信先が何か必要。
+## alertmanager
+http://localhost:9093  
+
+prometheusのalertmanagerはアラート発生時にその情報を送信する先(mailやwebhook)を要する。SAMでは送信先がSAM用のirisインスタンスになっているが、ここではひとまず[webhook.site](https://webhook.site/)を利用している。
+
+alertが発生すると、[このような](alert.json)がPOSTされるので、受信側はこの情報からalertの取得先URL(*)を生成し、必要な操作を行う。
+> (*)アラート発生源の"instance": "iris1:52773"なので、iris1インスタンスのURL+/api/monitor/alerts  
+> iris1はdocker-compose でport:52773で公開しているので、URLは、http://localhost:52773/api/monitor/alerts
+
 ```
-- name: 'isc_sam_default'
-  webhook_configs:
-  - url: http://xxx/xxx/alerts
+$ curl http://localhost:52773/api/monitor/alerts
+[{"time":"2022-10-13T02:09:10.554Z","severity":"2","message":"Severe error xxx"}]
 ```
 
-URLは http://localhost:9093 。
+
 
 ## node exporter
 テスト用のメトリック収集

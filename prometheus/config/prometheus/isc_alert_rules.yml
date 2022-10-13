@@ -1,8 +1,0 @@
-groups:
-- name: iris_alerts_rules
-  rules:
-  - alert: iris_system_alerts
-    annotations:
-      description: 'defined as expr: (iris_system_alerts{cluster="iriscluster"} > 0)'
-    expr: (iris_system_alerts{cluster="iriscluster"} > 0)
-#    expr: (idelta(iris_system_alerts_log[5m]) != 0) or (iris_system_alerts_new > 0)

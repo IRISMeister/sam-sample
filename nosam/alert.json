@@ -1,0 +1,40 @@
+{
+	"receiver": "your_receiver",
+	"status": "firing",
+	"alerts": [
+	  {
+		"status": "firing",
+		"labels": {
+		  "alertname": "iris_system_alerts",
+		  "cluster": "iriscluster",
+		  "instance": "iris1:52773",
+		  "job": "SAM"
+		},
+		"annotations": {
+		  "description": "iris alerts"
+		},
+		"startsAt": "2022-10-13T02:09:19.608817958Z",
+		"endsAt": "0001-01-01T00:00:00Z",
+		"generatorURL": "http://prometheus:9090/graph?g0.expr=%28idelta%28iris_system_alerts_log%5B5m%5D%29+%21%3D+0%29+or+%28iris_system_alerts_new+%3E+0%29&g0.tab=1",
+		"fingerprint": "51be57eeb0ff93d3"
+	  }
+	],
+	"groupLabels": {
+	  "alertname": "iris_system_alerts",
+	  "cluster": "iriscluster",
+	  "instance": "iris1:52773",
+	  "job": "SAM"
+	},
+	"commonLabels": {
+	  "alertname": "iris_system_alerts",
+	  "cluster": "iriscluster",
+	  "instance": "iris1:52773",
+	  "job": "SAM"
+	},
+	"commonAnnotations": {
+	  "description": "iris alerts"
+	},
+	"externalURL": "http://5cfdbfdd9936:9093",
+	"version": "4",
+	"groupKey": "{}:{alertname=\"iris_system_alerts\", cluster=\"iriscluster\", instance=\"iris1:52773\", job=\"SAM\"}"
+  }
