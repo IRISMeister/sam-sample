@@ -1,11 +1,11 @@
 ﻿# Prometheus and Grafana only
 prometheus + Grafanaだけ(SAM無し)で監視する試み。
-dockerのvolume mountもcpfや各コンフィグ以外には使わないようにする。
+dockerのvolumeもbind mountのみを使用するように変更。cpfや各コンフィグ用途に使用。
 
 利便性等のために、[grafana.ini](config/grafana/grafana.ini)をあれこれ(編集を許可、URLなど)変更している。[SAM用のものと](../sam-1.1.0.107-unix/config/grafana/grafana.ini)と比較すると変更点がわかる。
 
 # 準備
-webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。起動する前に、同サイトにて自分用のURLを取得し、[isc_alertmanager.yml](config/alertmanager/isc_alertmanager.yml)のurlに上書き保存する。
+webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。起動する前に、同サイトにて自分用のURLを取得し、[isc_alertmanager.yml](config/alertmanager/isc_alertmanager.yml)のurlを「Your unique URL」で上書き保存する。
 
 ```
 - name: 'isc_sam_default'
@@ -15,7 +15,7 @@ webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。
 
 # 起動
 ```
-$ cd nosam-1.1.0.107
+$ cd nosam-2.0.1.181
 $ docker compose up -d
 ```
 
@@ -72,12 +72,25 @@ http://localhost:9090/
 
 node exporterの例
 ```
-Expression: rate(node_cpu_seconds_total{mode="system"}[1m])
+Expression: rate(node_cpu_seconds_total{mode="system"}[1m]) 
+「Execute」を押下。
+
+Element	Value
+{cpu="0",instance="node:9100",job="node-exporter",mode="system"}	0.02222222222222222
+{cpu="1",instance="node:9100",job="node-exporter",mode="system"}	0.015111111111111263
+{cpu="2",instance="node:9100",job="node-exporter",mode="system"}	0.01644444444444433
+{cpu="3",instance="node:9100",job="node-exporter",mode="system"}	0.025777777777777698
+
 ```
 
 IRISの例
 ```
 Expression: rate(iris_glo_ref_per_sec{instance="iris1:52773"}[1m])
+「Execute」を押下。
+
+Element	Value
+{cluster="iriscluster",instance="iris1:52773",job="SAM"}	3.866580742650163
+
 ```
 
 PromQLを使用。
@@ -95,6 +108,8 @@ http://localhost:9090/targets
 http://localhost:3000
 
 SAM Dashboardを選ぶとダッシュボードが表示できる。
+
++アイコン=>Dashboard=>New Dashboardの横の下矢印をクリック->SAM Managerフォルダ下のSAM Dashboardを選択
 
 Grafanaから見たprometheusのエンドポイントは、http://prometheus:9090/ になっている。[datasource.yml](config/grafana/datasource.yml)で指定している。
 
