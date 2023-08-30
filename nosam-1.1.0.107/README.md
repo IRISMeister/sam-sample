@@ -15,7 +15,7 @@ webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。
 
 # 起動
 ```
-$ cd nosam
+$ cd nosam-1.1.0.107
 $ docker compose up -d
 ```
 
