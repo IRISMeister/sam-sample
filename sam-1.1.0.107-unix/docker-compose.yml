@@ -46,10 +46,11 @@ services:
       - irisdata:/dur
       - ./config:/config
   iris-init:
-    command: 'chown -R 51773:51773 /dur'
+    command: 'chown -R 51773:51773 /dur && chmod 777 /pro'
     image: busybox
     volumes:
       - irisdata:/dur
+      - ./config/prometheus:/pro
   nginx:
     depends_on:
       - iris

@@ -22,7 +22,8 @@ services:
     image: grafana/grafana:9.1.7
     restart: on-failure
     volumes:
-      - ./config/grafana/data:/var/lib/grafana
+      - grafdata:/var/lib/grafana
+      #- ./config/grafana/data:/var/lib/grafana
       - ./config/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./config/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./config/grafana/dashboard-provider.yml:/etc/grafana/provisioning/dashboards/dashboard-provider.yml
@@ -34,8 +35,10 @@ services:
     environment:
       - ISC_DATA_DIRECTORY=/dur/iconfig
     expose:
-      - '51773'
+      - '1972'
       - '52773'
+    ports:
+      - "52774:52773"
     hostname: IRIS
     image: containers.intersystems.com/intersystems/sam:2.0.1.181
     init: true
@@ -46,10 +49,11 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
   iris-init:
-    command: 'chown -R 51773:51773 /dur'
+    command: 'chown -R 51773:51773 /dur && chmod 777 /pro'
     image: busybox
     volumes:
       - irisdata:/dur
+      - ./config/prometheus:/pro
   nginx:
     depends_on:
       - iris
@@ -74,6 +78,30 @@ services:
     restart: on-failure
     volumes:
       - ./config/prometheus:/config
+
+  iris1:
+    image: containers.intersystems.com/intersystems/iris-community:2023.1.1.380.0
+    hostname: iris1
+    command:
+      --check-caps false
+    ports:
+      - "1972:1972"
+      - "52773:52773"
+    environment:
+      - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
+    volumes:
+      - ./iris-target/cpf:/cpf
+
+  iris2:
+    image: containers.intersystems.com/intersystems/iris-community:2023.1.1.380.0
+    hostname: iris2
+    command:
+      --check-caps false
+    environment:
+      - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
+    volumes:
+      - ./iris-target/cpf:/cpf
 version: '3.7'
 volumes:
+  grafdata: ~
   irisdata: ~
