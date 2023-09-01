@@ -2,7 +2,7 @@
 prometheus + Grafanaだけ(SAM無し)で監視する試み。
 dockerのvolumeもbind mountのみを使用するように変更。cpfや各コンフィグ用途に使用。
 
-利便性等のために、[grafana.ini](config/grafana/grafana.ini)をあれこれ(編集を許可、URLなど)変更している。[SAM用のものと](../sam-1.1.0.107-unix/config/grafana/grafana.ini)と比較すると変更点がわかる。
+利便性等のために、[grafana.ini](config/grafana/grafana.ini)をあれこれ(編集を許可、URLなど)変更している。[SAM用のものと](../sam-2.0.1.181-unix/config/grafana/grafana.ini)と比較すると変更点がわかる。
 
 # 準備
 webhookのテスト用に[webhook.site](https://webhook.site/)を利用する。起動する前に、同サイトにて自分用のURLを取得し、[isc_alertmanager.yml](config/alertmanager/isc_alertmanager.yml)のurlを「Your unique URL」で上書き保存する。
