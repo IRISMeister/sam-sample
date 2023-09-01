@@ -66,4 +66,4 @@ You'll be prompted to login. You can use standard InterSystems IRIS credentials 
 [IRIS native Prometheus exporter documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCM_rest)
 
 ## 番外編
-SAMを使用せず、prometheus + Grafanaだけを利用する方法は[こちら](nosam/README.md)。
+SAMを使用せず、prometheus + Grafanaだけを利用する方法は[こちら](nosam-2.0.1.181/README.md)。
