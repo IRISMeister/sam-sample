@@ -60,6 +60,11 @@ In your browser, visit:
 	```http://<ip-address-of-host-where-SAM-runs>:8080/api/sam/app/index.csp```  
 You'll be prompted to login. You can use standard InterSystems IRIS credentials like _SYSTEM/SYS. You'll be prompted to change the password.
 
+
+```  
+http://localhost:8080/api/sam/app/index.csp
+```  
+
 ## LEARN MORE ABOUT SAM
 [SAM documentation](https://docs.intersystems.com/sam/csp/docbook/Doc.View.cls?KEY=ASAM)
 

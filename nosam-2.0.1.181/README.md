@@ -68,6 +68,12 @@ iris_system_alerts_new 0
 
 
 ## prometheus U/I
+
+取得対象の表示
+
+http://localhost:9090/targets
+
+
 http://localhost:9090/
 
 node exporterの例
@@ -85,13 +91,23 @@ Element	Value
 
 IRISの例
 ```
-Expression: rate(iris_glo_ref_per_sec{instance="iris1:52773"}[1m])
+Expression: iris_glo_ref_per_sec{instance="iris1:52773"}[30s]
+Consoleに切り替えて、「Execute」を押下。
+
+iris_glo_ref_per_sec{cluster="iriscluster",instance="iris1:52773",job="SAM"}	
+154 @1699336158.778
+148 @1699336173.779
+
+Expression: avg_over_time(iris_glo_ref_per_sec{instance="iris1:52773"}[30s])
 「Execute」を押下。
 
-Element	Value
-{cluster="iriscluster",instance="iris1:52773",job="SAM"}	3.866580742650163
+Element                                                  Value
+{cluster="iriscluster",instance="iris1:52773",job="SAM"}	156  <==上記2ポイントの平均
 
+Graphに切り替え
 ```
+![](../img/query1.png)
+
 
 PromQLを使用。
 https://qiita.com/tatsurou313/items/64fcaae3567f24d13dd5
@@ -100,18 +116,14 @@ https://qiita.com/tatsurou313/items/64fcaae3567f24d13dd5
 
 http://localhost:9090/alerts
 
-取得対象の表示
-
-http://localhost:9090/targets
-
 ## Grafana U/I
 http://localhost:3000
 
-SAM Dashboardを選ぶとダッシュボードが表示できる。
+Home→SAM Managerフォルダ→SAM Dashboardを選ぶとダッシュボードが表示できる。
 
-+アイコン=>Dashboard=>New Dashboardの横の下矢印をクリック->SAM Managerフォルダ下のSAM Dashboardを選択
+![](../img/db1.png)
 
-Grafanaから見たprometheusのエンドポイントは、http://prometheus:9090/ になっている。[datasource.yml](config/grafana/datasource.yml)で指定している。
+> Grafanaから見たprometheusのエンドポイントは、http://prometheus:9090/ になっている。[datasource.yml](config/grafana/datasource.yml)で指定している。
 
 ## alertmanager
 http://localhost:9093  
@@ -120,14 +132,12 @@ prometheusのalertmanagerはアラート発生時にその情報を送信する�
 
 alertが発生すると、[このような](alert.json)がPOSTされるので、受信側はこの情報からalertの取得先URL(*)を生成し、必要な操作を行う。
 > (*)アラート発生源の"instance": "iris1:52773"なので、iris1インスタンスのURL+/api/monitor/alerts  
-> iris1はdocker-compose でport:52773で公開しているので、URLは、http://localhost:52773/api/monitor/alerts
+> iris1はdocker-compose でport:52773で公開しているので、URLは、http://localhost:52773/api/monitor/alerts になる。
 
 ```
 $ curl http://localhost:52773/api/monitor/alerts
 [{"time":"2022-10-13T02:09:10.554Z","severity":"2","message":"Severe error xxx"}]
 ```
-
-
 
 ## node exporter
 テスト用のメトリック収集
