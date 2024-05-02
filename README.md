@@ -1,4 +1,7 @@
 # System Alerting and Monitoring (SAM) 
+
+SAMは[Deprecate](https://www.intersystems.com/support/product-alerts-advisories/advisory-deprecation-of-intersystems-system-alerting-and-monitoring-sam/)となりました。番外編をご覧ください。
+
 https://github.com/intersystems-community/sam を事前展開したもの、プラスアルファ。
 
 オリジナルを変更している。
