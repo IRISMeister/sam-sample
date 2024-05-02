@@ -160,7 +160,7 @@ node exporterの例
 Expression: rate(node_cpu_seconds_total{mode="system"}[1m]) 
 「Execute」を押下。
 
-Element	Value
+Element	                                                         Value
 {cpu="0",instance="node:9100",job="node-exporter",mode="system"}	0.02222222222222222
 {cpu="1",instance="node:9100",job="node-exporter",mode="system"}	0.015111111111111263
 {cpu="2",instance="node:9100",job="node-exporter",mode="system"}	0.01644444444444433
@@ -173,9 +173,9 @@ IRISの例
 Expression: iris_glo_ref_per_sec{instance="iris1:52773"}[30s]
 Consoleに切り替えて、「Execute」を押下。
 
-iris_glo_ref_per_sec{cluster="iriscluster",instance="iris1:52773",job="SAM"}	
-154 @1699336158.778
-148 @1699336173.779
+Element	                                                                     Value
+iris_glo_ref_per_sec{cluster="iriscluster",instance="iris1:52773",job="SAM"}	154 @1699336158.778
+                                                                              148 @1699336173.779
 
 Expression: avg_over_time(iris_glo_ref_per_sec{instance="iris1:52773"}[30s])
 「Execute」を押下。

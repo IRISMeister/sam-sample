@@ -60,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "iris_cpu_usage{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_cpu_usage{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "legendFormat": "CPU Utilization",
           "refId": "A"
         }
@@ -154,7 +154,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "iris_phys_reads_per_sec{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_phys_reads_per_sec{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Database Reads",
@@ -254,14 +254,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "iris_glo_ref_per_sec{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_glo_ref_per_sec{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Glorefs",
           "refId": "D"
         },
         {
-          "expr": "iris_glo_ref_rem_per_sec{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_glo_ref_rem_per_sec{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "legendFormat": "Remote Glorefs",
           "refId": "A"
         }
@@ -355,7 +355,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "iris_db_latency{id=\"IRISSYS\", job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_db_latency{id=\"IRISSYS\", job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Database Latency",
@@ -448,7 +448,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "iris_glo_update_per_sec{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_glo_update_per_sec{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Global Updates",
@@ -565,7 +565,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_jrn_size{id=\"primary\",job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_jrn_size{id=\"primary\",job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "refId": "A"
         }
       ],
@@ -649,7 +649,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_license_percent_used{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_license_percent_used{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "refId": "A"
         }
       ],
@@ -734,7 +734,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_system_alerts{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_system_alerts{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "metric": "iris_system_alerts",
@@ -823,7 +823,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_jrn_free_space{id=\"primary\",job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_jrn_free_space{id=\"primary\",job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "refId": "A"
         }
       ],
@@ -907,7 +907,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_license_available{job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_license_available{job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "refId": "A"
         }
       ],
@@ -993,7 +993,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_jrn_free_space{id=\"WIJ\",job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_jrn_free_space{id=\"WIJ\",job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "refId": "A"
         }
       ],
@@ -1054,7 +1054,7 @@
       "pluginVersion": "6.3.2",
       "targets": [
         {
-          "expr": "iris_disk_percent_full{id=\"IRISSYS\",job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_disk_percent_full{id=\"IRISSYS\",job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "legendFormat": "IRIS Disk Percent",
           "refId": "A"
         }
@@ -1130,7 +1130,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "iris_directory_space{id=\"IRISSYS\",job=\"SAM\", instance=\"[[Instance]]\"}",
+          "expr": "iris_directory_space{id=\"IRISSYS\",job=\"[[Instance]]\", instance=\"[[Instance]]\"}",
           "legendFormat": "IRIS Space Remaining",
           "refId": "A"
         }

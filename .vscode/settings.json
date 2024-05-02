@@ -5,7 +5,8 @@
             "webServer": {
                 "scheme": "http",
                 "host": "localhost",
-                "port": 52773
+                "pathPrefix": "/iris1",
+                "port": 8882
             },
             "username": "SuperUser",
             "password": "SYS"
@@ -13,7 +14,7 @@
     },
     "objectscript.conn": {
         "server": "iris",
-        "ns": "%SYS",
+        "ns": "USER",
         "active": true
     }
 }

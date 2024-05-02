@@ -12,15 +12,29 @@ rule_files:
   - "./isc_alert_rules.yml"
 
 scrape_configs:
-  - job_name: SAM
-    metrics_path: /api/monitor/metrics
+  - job_name: 'iris1'
+    metrics_path: /iris1/api/monitor/metrics
     scheme: http
     static_configs:
     - labels:
         cluster: "iriscluster"
       targets:
-      - iris1:52773
-      - iris2:52773
+      - webgateway:80
+    relabel_configs:
+      - target_label: instance
+        replacement: 'iris1'
+
+  - job_name: 'iris2'
+    metrics_path: /iris2/api/monitor/metrics
+    scheme: http
+    static_configs:
+    - labels:
+        cluster: "iriscluster"
+      targets:
+      - webgateway:80
+    relabel_configs:
+      - target_label: instance
+        replacement: 'iris2'
 
   - job_name: 'prometheus'
     scrape_interval: 5s

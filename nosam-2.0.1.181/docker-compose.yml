@@ -56,27 +56,37 @@ services:
       - 9100:9100
 
   iris1:
-    image: containers.intersystems.com/intersystems/iris-community:2023.1.1.380.0
+    #image: containers.intersystems.com/intersystems/iris-community:2024.1
+    build:
+      context: ./build
     hostname: iris1
-    command:
-      --check-caps false
-    ports:
-      - "1972:1972"
-      - "52773:52773"
+    command: --ISCAgent false --monitorCPF false
     environment:
       - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
     volumes:
       - ./iris-target/cpf:/cpf
 
   iris2:
-    image: containers.intersystems.com/intersystems/iris-community:2023.1.1.380.0
+    build:
+      context: ./build
     hostname: iris2
-    command:
-      --check-caps false
+    command: --ISCAgent false --monitorCPF false
     environment:
       - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
     volumes:
       - ./iris-target/cpf:/cpf
 
-version: '3.7'
-
+  webgateway:
+    image: containers.intersystems.com/intersystems/webgateway:2024.1
+    init: true
+    container_name: webgateway
+    hostname: webgateway
+    ports:
+    - "8882:80"
+    - "8883:443"
+    environment:
+    #- ISC_DATA_DIRECTORY=/webgateway-shared/durable
+    - ISC_CSP_CONF_FILE=/webgateway-shared/CSP.conf
+    - ISC_CSP_INI_FILE=/webgateway-shared/CSP.ini
+    volumes:
+    - ./webgateway:/webgateway-shared

@@ -1,0 +1,34 @@
+作業メモ
+
+PWS廃止に伴うwebgateway追加、ポート変更で生じた変更。
+
+nosam-2.0.1.181/config/prometheus/isc_prometheus.yml書き換え完了
+irisノードごとに、pathが変わってしまう(/iris1/csp, /iris2/csp)ので、JOBを分けざるを得なかった。
+
+nosam-2.0.1.181/config/grafana/dashboard.json
+のexprを下記のように書き換えていけばgraphanaの表示も正しくなる。
+
+iris_phys_reads_per_sec{job="SAM", instance="[[Instance]]"}
+iris_phys_reads_per_sec{job="[[Instance]]", instance="[[Instance]]"}
+
+endpointも変わる。
+curl -s http://localhost:8882/iris1/api/monitor/metrics
+
+
+k8s環境を見据えるとiris1/iris2にそれぞれwebgatewayがいるほうが良いかもしれない(監視の目的にもかなう)。
+webgateway1, webgateway2 のように専用のコンテナを作成するか？これをするなら
+isc_prometheus.ymlは下記のようになる？
+
+  - job_name: SAM
+    metrics_path: /api/monitor/metrics
+    scheme: http
+    static_configs:
+    - labels:
+        cluster: "iriscluster"
+      targets:
+      - wgw1:80
+      - wgw2:80
+これだとインスタンス名がwgw1:80になってしまう（元々はiris1:52773）。
+
+ここの技を使ってwgw1->iris1, wgw2->iris2などにlabelを書き換えてしまうことは可能。
+https://qiita.com/fkshom/items/bafb2160e2c9ca8ded38
