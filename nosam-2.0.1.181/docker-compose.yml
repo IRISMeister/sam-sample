@@ -17,7 +17,7 @@ services:
       - prometheus
     ports:
       - 3000:3000
-    image: grafana/grafana:6.7.1
+    image: grafana/grafana:10.4.2
     restart: on-failure
     volumes:
       - ./config/grafana/grafana.ini:/etc/grafana/grafana.ini
@@ -65,6 +65,8 @@ services:
       - ISC_CPF_MERGE_FILE=/cpf/merge.cpf
     volumes:
       - ./iris-target/cpf:/cpf
+    ports:
+      - 1972:1972
 
   iris2:
     build:

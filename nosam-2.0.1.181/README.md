@@ -229,4 +229,22 @@ iris_system_alerts_new 1
 ![](./img/webhook.png)
 
 
+## DashBoard追加・パネル追加など
 
+Sign-Inすれば操作できるようになる。初期ユーザ名・パスワードは admin / admin 。
+
+Add visualization等が使えるようになる。
+
+## カスタムセンサ
+
+[独自のメトリック](nosam-2.0.1.181/build/src/MyApp/Sensor.cls)を追加することが可能。
+
+```
+sco_sensor1{id="LOC-123"} 7
+sco_sensor1{id="LOC-456"} 36
+sco_stock{city="Tokyo",id="LOC-456",latitude="35.652832",longitude="139.839478",size="30"} 1
+sco_stock{city="London",id="LOC-123",latitude="51.509865",longitude="-.118092",size="50"} 1
+```
+
+sco_stock{}を[GeoMap](https://grafana.com/grafana/plugins/geomap/)と組み合わせると地図にプロットが出来る。
+> GeoMapのバグ(?)でValue値をプロットサイズとして使用できない。
